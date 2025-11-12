@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public/cst_cmpgn/browser",
+    "public": "dist/cst_cmpgn/browser",
     "ignore": [
       "firebase.json",
       "**/.*",
