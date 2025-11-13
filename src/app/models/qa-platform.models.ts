@@ -64,4 +64,4 @@ export interface SelectedIssue extends Issue {
   agent: string;
 }
 
-export type TabType = 'upload' | 'results' | 'matrix';
+export type TabType = 'upload' | 'reasoning' | 'results' | 'matrix';

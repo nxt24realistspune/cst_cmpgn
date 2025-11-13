@@ -48,6 +48,7 @@ import { FormsModule } from '@angular/forms';
           </div>
         </div>
         <div class="space-y-4">
+          <br/>
           <h3 class="font-semibold text-slate-900">Campaign Configuration</h3>
 
           <div class="grid md:grid-cols-2 gap-4">
@@ -145,15 +146,9 @@ import { FormsModule } from '@angular/forms';
       <div class="flex justify-end">
         <button
           (click)="runAnalysis()"
-          [disabled]="analyzing()"
           class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
-          <div
-            *ngIf="analyzing()"
-            class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
-          ></div>
           <svg
-            *ngIf="!analyzing()"
             class="w-5 h-5"
             fill="none"
             stroke="currentColor"
@@ -166,7 +161,7 @@ import { FormsModule } from '@angular/forms';
               d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M19 10a9 9 0 11-18 0 9 9 0 0118 0z"
             />
           </svg>
-          {{ analyzing() ? 'Running Agentic QA...' : 'Run QA Analysis (CTA Plugin)' }}
+          {{ 'Run QA Analysis (CTA Plugin)' }}
         </button>
       </div>
     </div>
@@ -198,14 +193,14 @@ export class UploadTabComponent {
   autoFix = signal(true);
   showReasoningLogs = signal(true);
   generateFixRecommendations = signal(false);
-  analyzing = signal(false);
+  // analyzing = signal(false);
 
   runAnalysis(): void {
-    this.analyzing.set(true);
+    // this.analyzing.set(true);
     this.analyzeRequested.emit();
   }
 
   setAnalyzing(analyzing: boolean): void {
-    this.analyzing.set(analyzing);
+    // this.analyzing.set(analyzing);
   }
 }
