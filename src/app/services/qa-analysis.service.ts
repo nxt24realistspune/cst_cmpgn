@@ -10,11 +10,13 @@ export class QaAnalysisService {
   private _reasoningLogs = new BehaviorSubject<ReasoningLog[]>([]);
   private _analyzing = new BehaviorSubject<boolean>(false);
   private _currentAgent = new BehaviorSubject<string | null>(null);
+  private _agentResponse = new BehaviorSubject<any>(null); // New subject for agent responses
 
   public qaResults$ = this._qaResults.asObservable();
   public reasoningLogs$ = this._reasoningLogs.asObservable();
   public analyzing$ = this._analyzing.asObservable();
   public currentAgent$ = this._currentAgent.asObservable();
+  public agentResponse$ = this._agentResponse.asObservable(); // Expose agent response observable
 
   simulateAgenticReasoning(): ReasoningLog[] {
     return [
@@ -55,12 +57,12 @@ export class QaAnalysisService {
     ];
   }
 
-  async runQaAnalysis(): Promise<void> {
+  async runQaAnalysis(htmlContent?: string): Promise<void> {
     this._analyzing.next(true);
     this._reasoningLogs.next([]);
-    
+
     const logs = this.simulateAgenticReasoning();
-    
+
     // Simulate progressive log updates
     for (let i = 0; i < logs.length; i++) {
       await new Promise(resolve => setTimeout(resolve, 200));
@@ -72,6 +74,11 @@ export class QaAnalysisService {
     // Set the final results
     this._qaResults.next(this.getMockQaResults());
     this._analyzing.next(false);
+
+    // If HTML content is provided, simulate agent response
+    if (htmlContent) {
+      this._agentResponse.next({ success: true, message: 'Agent received the HTML content for analysis.', htmlContent });
+    }
   }
 
   private getMockQaResults(): QaResults {
@@ -289,5 +296,20 @@ export class QaAnalysisService {
         }
       ]
     };
+  }
+
+  // New method to simulate calling an agent endpoint with HTML content
+  async callAgentEndpoint(htmlContent: string): Promise<void> {
+    // Simulate processing time
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Mock response from agent
+    const response = {
+      success: true,
+      message: 'Agent received the HTML content for analysis.',
+      htmlContent
+    };
+
+    this._agentResponse.next(response);
   }
 }

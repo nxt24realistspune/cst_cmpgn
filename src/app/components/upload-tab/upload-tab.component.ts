@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpService } from '../../services/http-service';
 
 @Component({
   selector: 'app-upload-tab',
@@ -185,7 +186,11 @@ import { FormsModule } from '@angular/forms';
   ],
 })
 export class UploadTabComponent {
-  @Output() analyzeRequested = new EventEmitter<void>();
+  /**
+   *
+   */
+  constructor(private httpService: HttpService) {
+  }
 
   campaignName = signal('Q4 Holiday Promotion');
   brandProfile = signal('Company Brand 2024');
@@ -197,7 +202,9 @@ export class UploadTabComponent {
 
   runAnalysis(): void {
     // this.analyzing.set(true);
-    this.analyzeRequested.emit();
+    this.httpService.dashboardAgent().subscribe(
+      data => console.log(data)
+    )
   }
 
   setAnalyzing(analyzing: boolean): void {
