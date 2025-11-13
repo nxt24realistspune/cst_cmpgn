@@ -22,9 +22,7 @@ import { CommonModule } from '@angular/common';
             </div>
           </div>
           <div class="flex gap-2">
-            <button
-              *ngIf="analysisComplete"
-              (click)="toggleReasoningWindow()"
+            <!-- <button
               class="px-4 py-2 border rounded-lg transition-colors flex items-center gap-2 bg-white border-slate-300 text-slate-700 hover:bg-slate-50">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,7 +31,6 @@ import { CommonModule } from '@angular/common';
               Reasoning Logs
             </button>
             <button
-              *ngIf="analysisComplete"
               class="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-2">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -42,7 +39,6 @@ import { CommonModule } from '@angular/common';
               Export Report
             </button>
             <button
-              *ngIf="analysisComplete"
               class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -51,7 +47,7 @@ import { CommonModule } from '@angular/common';
                       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
               </svg>
               Preview Email
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -64,13 +60,13 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class HeaderComponent {
-  @Input() analysisComplete = false;
-  // @Input() showReasoningWindow = false;
-  @Output() reasoningWindowToggled = new EventEmitter<void>();
+  // @Input() analysisComplete = false;
+  // // @Input() showReasoningWindow = false;
+  // @Output() reasoningWindowToggled = new EventEmitter<void>();
 
-  toggleReasoningWindow(): void {
-    this.reasoningWindowToggled.emit();
-  }
+  // toggleReasoningWindow(): void {
+  //   this.reasoningWindowToggled.emit();
+  // }
 
   // getReasoningButtonClass(): string {
   //   const baseClass = '';
