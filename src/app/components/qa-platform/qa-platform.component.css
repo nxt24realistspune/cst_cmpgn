@@ -327,38 +327,8 @@
   font-weight: 500;
 }
 
-.upload-link {
-  color: #3b82f6;
-
-  font-weight: 600;
-
-  text-decoration: underline;
-}
-
-.upload-formats {
-  font-size: 0.875rem;
-
-  color: #94a3b8;
-}
-
-/* File Preview */
-
-.file-preview {
-  display: flex;
-
-  align-items: center;
-
-  gap: 1rem;
-
-  width: 100%;
-
-  padding: 1rem;
-
-  background: white;
-
-  border-radius: 8px;
-
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+input[type="file"] {
+  display: none;
 }
 
 .file-icon {

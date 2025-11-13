@@ -219,27 +219,7 @@
       </button>
     </div>
 
-    <!-- Result Section -->
+    <app-summary-report [summary]="result[0]._summary" [report]="result[0]"></app-summary-report>
 
-    <div *ngIf="result" class="result-section">
-      <div class="result-header">
-        <div class="result-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
-            />
-          </svg>
-        </div>
-
-        <h3>Analysis Results</h3>
-      </div>
-
-      <div class="result-content">
-        <pre class="result-json">{{ result | json }}</pre>
-      </div>
-    </div>
   </div>
 </div>

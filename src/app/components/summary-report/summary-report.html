@@ -1,0 +1,73 @@
+<div class="report-container">
+
+  <!-- SUMMARY REPORT -->
+  <section class="card">
+    <h2>Summary Report</h2>
+
+    <table class="summary-table">
+      <tr>
+        <th>Working Links</th>
+        <th>Broken Links</th>
+        <th>Missing Images</th>
+        <th>Alt Issues</th>
+        <th>Score</th>
+      </tr>
+      <tr>
+        <td>{{_summary.num_working_links}}</td>
+        <td>{{_summary.num_broken_links}}</td>
+        <td>{{_summary.num_missing_images}}</td>
+        <td>{{_summary.num_alt_issues}}</td>
+        <td>{{_summary.score}}</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- DETAILED REPORT -->
+  <section class="card">
+    <h2>Detailed Report</h2>
+
+    <div class="detail-row">
+      <label>Hero Image:</label>
+      <span>{{_report.hero_image_status}}</span>
+    </div>
+
+    <div class="detail-row">
+      <label>Logo Present:</label>
+      <span>{{_report.logo_present}}</span>
+    </div>
+
+    <div class="detail-row">
+      <label>Spelling Issues:</label>
+      <span>{{_report.spelling_issues.join(', ')}}</span>
+    </div>
+
+    <div class="detail-row">
+      <label>Unsubscribe Link Present:</label>
+      <span>{{_report.unsubscribe_link_present}}</span>
+    </div>
+
+    <div class="detail-row">
+      <label>Final Recommendation:</label>
+      <span>{{_report.final_recommendation}}</span>
+    </div>
+  </section>
+
+  <!-- CODE COMPARISON -->
+  <section class="card">
+    <h2>HTML Comparison</h2>
+
+    <div class="iframe-wrapper">
+      <div class="iframe-box">
+        <h3>Original HTML</h3>
+        <iframe [srcdoc]="_report.original_email"></iframe>
+      </div>
+
+      <div class="iframe-box">
+        <h3>Corrected HTML</h3>
+        <iframe [srcdoc]="_report.agent_suggestions"></iframe>
+      </div>
+    </div>
+
+  </section>
+
+</div>
