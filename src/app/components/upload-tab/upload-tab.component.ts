@@ -376,6 +376,6 @@ export class UploadTabComponent {
     console.log(this.autoFix());
     console.log(this.showReasoningLogs());
     console.log(this.generateFixRecommendations());
-    this.httpService.dashboardAgent().subscribe((data) => console.log(data));
+    this.httpService.dashboardAgent(this.emailCopy()).subscribe((data) => console.log(data));
   }
 }

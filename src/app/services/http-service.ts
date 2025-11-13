@@ -15,14 +15,14 @@ export class HttpService {
 
   }
 
-  dashboardAgent(): Observable<any> {
+  dashboardAgent(emailCopy: string): Observable<any> {
 
     //add headers to httpclient call
     const headers = new HttpHeaders({
     'Content-Type': 'application/json',
     });
 
-    return this.httpClient.get(API_BASE_URL + AGENT_API_URL, { headers });
+    return this.httpClient.get(API_BASE_URL + AGENT_API_URL + emailCopy , { headers });
 
   }
 
