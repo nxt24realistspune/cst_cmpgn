@@ -1,0 +1,178 @@
+<div class="qa-platform-container">
+  <!-- Header with Logo -->
+  <div class="header-section">
+    <div class="logo-container">
+      <!-- Mail Polish Logo -->
+      <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <!-- Envelope shape -->
+        <rect x="8" y="16" width="48" height="32" rx="4" fill="url(#logoGradient)" opacity="0.9"/>
+        <path d="M8 20 L32 36 L56 20" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M8 20 L8 44 M56 20 L56 44" stroke="white" stroke-width="2" stroke-opacity="0.5"/>
+        <!-- Sparkle/Polish effect -->
+        <circle cx="48" cy="24" r="2" fill="#FCD34D"/>
+        <path d="M48 20 L48 28 M44 24 L52 24" stroke="#FCD34D" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">
+        <h1 class="brand-name">MailPolish</h1>
+        <p class="brand-tagline">AI-Powered Email Quality Assurance</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload Section -->
+  <div class="content-wrapper">
+    <div class="upload-grid">
+      <!-- Left File Upload - Reference File -->
+      <div class="upload-section">
+        <div class="section-header">
+          <div class="section-icon reference-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <div class="section-title-group">
+            <h3 class="section-title">Reference File</h3>
+            <p class="section-subtitle">Upload your design reference</p>
+          </div>
+        </div>
+
+        <div class="upload-card" [class.has-file]="leftFile">
+          <input
+            type="file"
+            id="leftFile"
+            class="file-input"
+            (change)="onLeftFileSelected($event)"
+            accept="image/*,.pdf"
+            #leftFileInput
+          />
+
+          <label for="leftFile" class="upload-label" *ngIf="!leftFile">
+            <div class="upload-icon-wrapper">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+              </svg>
+            </div>
+            <span class="upload-text">Drop your file here or <span class="upload-link">browse</span></span>
+            <span class="upload-formats">Supports: JPG, PNG, PDF</span>
+          </label>
+
+          <div *ngIf="leftFile" class="file-preview">
+            <div class="file-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <div class="file-details">
+              <span class="file-name">{{ leftFile.name }}</span>
+              <span class="file-size">{{ formatFileSize(leftFile.size) }}</span>
+            </div>
+            <button class="remove-btn" (click)="removeLeftFile()" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right File Upload - HTML File -->
+      <div class="upload-section">
+        <div class="section-header">
+          <div class="section-icon check-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+          </div>
+          <div class="section-title-group">
+            <h3 class="section-title">File to be Checked</h3>
+            <p class="section-subtitle">Upload your HTML email</p>
+          </div>
+        </div>
+
+        <div class="upload-card" [class.has-file]="rightFile">
+          <input
+            type="file"
+            id="rightFile"
+            class="file-input"
+            (change)="onRightFileSelected($event)"
+            accept=".html"
+            #rightFileInput
+          />
+
+          <label for="rightFile" class="upload-label" *ngIf="!rightFile">
+            <div class="upload-icon-wrapper">
+              <svg class="upload-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+              </svg>
+            </div>
+            <span class="upload-text">Drop your file here or <span class="upload-link">browse</span></span>
+            <span class="upload-formats">Supports: HTML files only</span>
+          </label>
+
+          <div *ngIf="rightFile" class="file-preview">
+            <div class="file-icon html-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+              </svg>
+            </div>
+            <div class="file-details">
+              <span class="file-name">{{ rightFile.name }}</span>
+              <span class="file-size">{{ formatFileSize(rightFile.size) }}</span>
+            </div>
+            <button class="remove-btn" (click)="removeRightFile()" type="button">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Action Button -->
+    <div class="action-section">
+      <button
+        class="check-btn"
+        [disabled]="!leftFile || !rightFile || isProcessing"
+        [class.processing]="isProcessing"
+        (click)="onCheckFiles()"
+        type="button">
+        <svg *ngIf="!isProcessing" class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <div *ngIf="isProcessing" class="spinner"></div>
+        <span *ngIf="!isProcessing">Analyze Files</span>
+        <span *ngIf="isProcessing">Processing...</span>
+      </button>
+    </div>
+
+    <!-- Result Section -->
+    <div *ngIf="result" class="result-section">
+      <div class="result-header">
+        <div class="result-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+          </svg>
+        </div>
+        <h3>Analysis Results</h3>
+      </div>
+      <div class="result-content">
+        <pre class="result-json">{{ result | json }}</pre>
+      </div>
+    </div>
+  </div>
+</div>
