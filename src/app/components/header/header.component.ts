@@ -35,18 +35,5 @@ import { CommonModule } from '@angular/common';
   `]
 })
 export class HeaderComponent {
-  // @Input() analysisComplete = false;
-  // // @Input() showReasoningWindow = false;
-  // @Output() reasoningWindowToggled = new EventEmitter<void>();
 
-  // toggleReasoningWindow(): void {
-  //   this.reasoningWindowToggled.emit();
-  // }
-
-  // getReasoningButtonClass(): string {
-  //   const baseClass = '';
-  //   return this.showReasoningWindow
-  //     ? `${baseClass} `
-  //     : `${baseClass} bg-white border-slate-300 text-slate-700 hover:bg-slate-50`;
-  // }
 }
