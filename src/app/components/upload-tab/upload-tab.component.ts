@@ -39,7 +39,7 @@ import { FormsModule } from '@angular/forms';
           ></textarea>
           <div class="mt-2">
             <label
-              [class]="uploadedFile() ? 'flex items-center gap-2 px-4 py-2 bg-green-50 border-2 border-green-500 rounded-lg cursor-pointer transition-colors' : 'flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition-colors'"
+              class="flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition-colors"
             >
               <input
                 #fileInput
@@ -48,33 +48,82 @@ import { FormsModule } from '@angular/forms';
                 type="file"
                 (change)="onFileSelected($event)"
               />
-              @if (uploadedFile()) {
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="text-green-600"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                </svg>
-                <span class="text-sm text-green-700 font-medium">{{ uploadedFile()?.name }}</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-600"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span class="text-sm text-gray-700">Or upload copy file (.txt, .doc, .docx)</span>
+            </label>
+          </div>
+
+          <!-- Uploaded File Display Cell -->
+          @if (uploadedFile()) {
+            <div class="mt-3 p-4 bg-green-50 border-2 border-green-500 rounded-lg">
+              <div class="flex items-start gap-3">
+                <div class="flex-shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="text-green-600"
+                  >
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M10 9H8"></path>
+                    <path d="M16 13H8"></path>
+                    <path d="M16 17H8"></path>
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-green-600 flex-shrink-0"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span class="text-xs font-semibold text-green-800 uppercase">File Uploaded</span>
+                  </div>
+                  <p class="text-sm font-medium text-gray-900 truncate">{{ uploadedFile()?.name }}</p>
+                  <p class="text-xs text-gray-600 mt-1">{{ formatFileSize(uploadedFile()!.size) }}</p>
+                </div>
                 <button
                   type="button"
                   (click)="removeFile($event)"
-                  class="ml-auto text-red-600 hover:text-red-800"
+                  class="flex-shrink-0 p-1.5 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-lg transition-colors"
                   title="Remove file"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -82,15 +131,15 @@ import { FormsModule } from '@angular/forms';
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   >
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
                   </svg>
                 </button>
-              } @else {
-                <span class="text-sm text-gray-700">Or upload copy file (.txt, .doc, .docx)</span>
-              }
-            </label>
-          </div>
+              </div>
+            </div>
+          }
         </div>
         <div class="space-y-4">
           <br/>
@@ -267,6 +316,14 @@ export class UploadTabComponent {
     if (fileInput) {
       fileInput.value = '';
     }
+  }
+
+  formatFileSize(bytes: number): string {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   }
 
   runAnalysis(): void {
