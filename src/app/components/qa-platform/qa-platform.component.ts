@@ -2,11 +2,12 @@ import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AGENT_API_URL, API_BASE_URL } from '../../constants/api-constants';
+import { SummaryReportComponent } from '../summary-report/summary-report.component';
 
 @Component({
   selector: 'app-qa-platform',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, SummaryReportComponent],
   templateUrl: './qa-platform.component.html',
   styleUrls: ['./qa-platform.component.css']
 })
