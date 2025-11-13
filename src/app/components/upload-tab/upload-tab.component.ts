@@ -35,6 +35,7 @@ import { HttpService } from '../../services/http-service';
             <label class="text-sm font-bold text-gray-800">Email Copy</label>
           </div>
           <textarea
+            [(ngModel)]="emailCopy"
             class="w-full h-32 p-3 border-2 border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none text-sm bg-white"
             placeholder="Paste your email copy/content here... The text that will be analyzed for tone, grammar, and messaging."
           ></textarea>
@@ -66,7 +67,7 @@ import { HttpService } from '../../services/http-service';
                 <polyline points="17 8 12 3 7 8"></polyline>
                 <line x1="12" y1="3" x2="12" y2="15"></line>
               </svg>
-              <span class="text-sm text-gray-700">Or upload copy files (.txt, .doc, .docx)</span>
+              <span class="text-sm text-gray-700">Or upload copy files (.txt)</span>
             </label>
           </div>
 
@@ -293,10 +294,11 @@ export class UploadTabComponent {
   constructor(private httpService: HttpService) {}
 
   campaignName = signal('');
+  emailCopy = signal('');
   brandProfile = signal('');
   audienceSegment = signal('');
-  autoFix = signal(true);
-  showReasoningLogs = signal(true);
+  autoFix = signal(false);
+  showReasoningLogs = signal(false);
   generateFixRecommendations = signal(false);
   uploadedFiles = signal<File[]>([]);
   // analyzing = signal(false);
@@ -334,10 +336,6 @@ export class UploadTabComponent {
           )}\n\nPlease upload only .txt, .doc, or .docx files`
         );
       }
-
-      // Reset the input to allow uploading the same files again
-      input.value = '';
-
       // Read file content
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -349,10 +347,11 @@ export class UploadTabComponent {
       reader.onerror = (error) => {
         console.error('Error reading file:', error);
       };
-
       for (let i = 0; i < input.files.length; i++) {
         reader.readAsText(input.files[i]);
       }
+      // Reset the input to allow uploading the same files again
+      input.value = '';
     }
   }
 
@@ -370,11 +369,13 @@ export class UploadTabComponent {
   }
 
   runAnalysis(): void {
-    // this.analyzing.set(true);
+    console.log(this.emailCopy());
+    console.log(this.campaignName());
+    console.log(this.brandProfile());
+    console.log(this.audienceSegment());
+    console.log(this.autoFix());
+    console.log(this.showReasoningLogs());
+    console.log(this.generateFixRecommendations());
     this.httpService.dashboardAgent().subscribe((data) => console.log(data));
-  }
-
-  setAnalyzing(analyzing: boolean): void {
-    // this.analyzing.set(analyzing);
   }
 }
