@@ -44,7 +44,7 @@ import { HttpService } from '../../services/http-service';
             >
               <input
                 #fileInput
-                accept=".txt,.doc,.docx"
+                accept=".txt"
                 class="hidden"
                 type="file"
                 multiple
@@ -72,83 +72,87 @@ import { HttpService } from '../../services/http-service';
 
           <!-- Uploaded Files Display Cells -->
           @if (uploadedFiles().length > 0) {
-            <div class="mt-3 space-y-2">
-              @for (file of uploadedFiles(); track file.name; let i = $index) {
-                <div class="p-4 bg-green-50 border-2 border-green-500 rounded-lg">
-                  <div class="flex items-start gap-3">
-                    <div class="flex-shrink-0">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="40"
-                        height="40"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="text-green-600"
-                      >
-                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
-                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
-                        <path d="M10 9H8"></path>
-                        <path d="M16 13H8"></path>
-                        <path d="M16 17H8"></path>
-                      </svg>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center gap-2 mb-1">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="text-green-600 flex-shrink-0"
-                        >
-                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
-                        <span class="text-xs font-semibold text-green-800 uppercase">File Uploaded</span>
-                      </div>
-                      <p class="text-sm font-medium text-gray-900 truncate">{{ file.name }}</p>
-                      <p class="text-xs text-gray-600 mt-1">{{ formatFileSize(file.size) }}</p>
-                    </div>
-                    <button
-                      type="button"
-                      (click)="removeFile(i)"
-                      class="flex-shrink-0 p-1.5 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-lg transition-colors"
-                      title="Remove file"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <polyline points="3 6 5 6 21 6"></polyline>
-                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                        <line x1="10" y1="11" x2="10" y2="17"></line>
-                        <line x1="14" y1="11" x2="14" y2="17"></line>
-                      </svg>
-                    </button>
-                  </div>
+          <div class="mt-3 space-y-2">
+            @for (file of uploadedFiles(); track file.name; let i = $index) {
+            <div class="p-4 bg-green-50 border-2 border-green-500 rounded-lg">
+              <div class="flex items-start gap-3">
+                <div class="flex-shrink-0">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="text-green-600"
+                  >
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                    <path d="M10 9H8"></path>
+                    <path d="M16 13H8"></path>
+                    <path d="M16 17H8"></path>
+                  </svg>
                 </div>
-              }
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-2 mb-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="text-green-600 flex-shrink-0"
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    <span class="text-xs font-semibold text-green-800 uppercase"
+                      >File Uploaded</span
+                    >
+                  </div>
+                  <p class="text-sm font-medium text-gray-900 truncate">{{ file.name }}</p>
+                  <p class="text-xs text-gray-600 mt-1">{{ formatFileSize(file.size) }}</p>
+                </div>
+                <button
+                  type="button"
+                  (click)="removeFile(i)"
+                  class="flex-shrink-0 p-1.5 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-lg transition-colors"
+                  title="Remove file"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path
+                      d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                    ></path>
+                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                  </svg>
+                </button>
+              </div>
             </div>
+            }
+          </div>
           }
         </div>
         <div class="space-y-4">
-          <br/>
+          <br />
           <h3 class="font-semibold text-slate-900">Campaign Configuration</h3>
 
           <div class="grid md:grid-cols-2 gap-4">
@@ -157,6 +161,7 @@ import { HttpService } from '../../services/http-service';
               <input
                 type="text"
                 [(ngModel)]="campaignName"
+                placeholder="Enter Campaign Name"
                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -169,6 +174,7 @@ import { HttpService } from '../../services/http-service';
                 [(ngModel)]="brandProfile"
                 class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               >
+                <option value="" disabled selected>Select an option</option>
                 <option value="Company Brand 2024">Company Brand 2024</option>
                 <option value="Holiday Campaign Style">Holiday Campaign Style</option>
                 <option value="Corporate Communications">Corporate Communications</option>
@@ -184,6 +190,7 @@ import { HttpService } from '../../services/http-service';
               [(ngModel)]="audienceSegment"
               class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             >
+              <option value="" disabled selected>Select an option</option>
               <option value="Premium Customers">Premium Customers</option>
               <option value="New Subscribers">New Subscribers</option>
               <option value="Lapsed Users">Lapsed Users</option>
@@ -248,12 +255,7 @@ import { HttpService } from '../../services/http-service';
           (click)="runAnalysis()"
           class="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
         >
-          <svg
-            class="w-5 h-5"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -288,12 +290,11 @@ export class UploadTabComponent {
   /**
    *
    */
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService) {}
 
-  campaignName = signal('Q4 Holiday Promotion');
-  brandProfile = signal('Company Brand 2024');
-  audienceSegment = signal('Premium Customers');
+  campaignName = signal('');
+  brandProfile = signal('');
+  audienceSegment = signal('');
   autoFix = signal(true);
   showReasoningLogs = signal(true);
   generateFixRecommendations = signal(false);
@@ -303,7 +304,7 @@ export class UploadTabComponent {
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      const validTypes = ['.txt', '.doc', '.docx'];
+      const validTypes = ['.txt'];
       const newFiles: File[] = [];
       const invalidFiles: string[] = [];
 
@@ -321,22 +322,42 @@ export class UploadTabComponent {
 
       // Add valid files to the existing array
       if (newFiles.length > 0) {
-        this.uploadedFiles.update(files => [...files, ...newFiles]);
+        this.uploadedFiles.update((files) => [...files, ...newFiles]);
         console.log(`${newFiles.length} file(s) uploaded successfully`);
       }
 
       // Show alert for invalid files
       if (invalidFiles.length > 0) {
-        alert(`The following files are not supported:\n${invalidFiles.join('\n')}\n\nPlease upload only .txt, .doc, or .docx files`);
+        alert(
+          `The following files are not supported:\n${invalidFiles.join(
+            '\n'
+          )}\n\nPlease upload only .txt, .doc, or .docx files`
+        );
       }
 
       // Reset the input to allow uploading the same files again
       input.value = '';
+
+      // Read file content
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result as string;
+        console.log('File content:', text);
+        // You can store this in a signal or variable
+        // this.emailCopyContent.set(text);
+      };
+      reader.onerror = (error) => {
+        console.error('Error reading file:', error);
+      };
+
+      for (let i = 0; i < input.files.length; i++) {
+        reader.readAsText(input.files[i]);
+      }
     }
   }
 
   removeFile(index: number): void {
-    this.uploadedFiles.update(files => files.filter((_, i) => i !== index));
+    this.uploadedFiles.update((files) => files.filter((_, i) => i !== index));
     console.log('File removed');
   }
 
@@ -345,14 +366,12 @@ export class UploadTabComponent {
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
   }
 
   runAnalysis(): void {
     // this.analyzing.set(true);
-    this.httpService.dashboardAgent().subscribe(
-      data => console.log(data)
-    )
+    this.httpService.dashboardAgent().subscribe((data) => console.log(data));
   }
 
   setAnalyzing(analyzing: boolean): void {
