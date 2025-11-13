@@ -39,12 +39,57 @@ import { FormsModule } from '@angular/forms';
           ></textarea>
           <div class="mt-2">
             <label
-              class="flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition-colors"
-              ><input accept=".txt,.doc,.docx" class="hidden" type="file" /><span
-                class="text-sm text-gray-700"
-                >Or upload copy file (.txt, .doc, .docx)</span
-              ></label
+              [class]="uploadedFile() ? 'flex items-center gap-2 px-4 py-2 bg-green-50 border-2 border-green-500 rounded-lg cursor-pointer transition-colors' : 'flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition-colors'"
             >
+              <input
+                #fileInput
+                accept=".txt,.doc,.docx"
+                class="hidden"
+                type="file"
+                (change)="onFileSelected($event)"
+              />
+              @if (uploadedFile()) {
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="text-green-600"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                  <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                </svg>
+                <span class="text-sm text-green-700 font-medium">{{ uploadedFile()?.name }}</span>
+                <button
+                  type="button"
+                  (click)="removeFile($event)"
+                  class="ml-auto text-red-600 hover:text-red-800"
+                  title="Remove file"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              } @else {
+                <span class="text-sm text-gray-700">Or upload copy file (.txt, .doc, .docx)</span>
+              }
+            </label>
           </div>
         </div>
         <div class="space-y-4">
@@ -193,7 +238,36 @@ export class UploadTabComponent {
   autoFix = signal(true);
   showReasoningLogs = signal(true);
   generateFixRecommendations = signal(false);
+  uploadedFile = signal<File | null>(null);
   // analyzing = signal(false);
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      const validTypes = ['.txt', '.doc', '.docx'];
+      const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+      if (validTypes.includes(fileExtension)) {
+        this.uploadedFile.set(file);
+        console.log('File uploaded successfully:', file.name);
+      } else {
+        alert('Please upload only .txt, .doc, or .docx files');
+        input.value = '';
+      }
+    }
+  }
+
+  removeFile(event: Event): void {
+    event.preventDefault();
+    event.stopPropagation();
+    this.uploadedFile.set(null);
+    // Reset the file input
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  }
 
   runAnalysis(): void {
     // this.analyzing.set(true);
