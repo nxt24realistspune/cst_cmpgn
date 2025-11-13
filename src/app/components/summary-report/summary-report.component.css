@@ -1,4 +1,4 @@
-/* Container */
+/* Summary Report Container */
 .summary-report-container {
   width: 100%;
   margin-top: 3rem;
@@ -16,7 +16,7 @@
   }
 }
 
-/* Report Cards */
+/* Report Cards - Matching qa-platform upload-section style */
 .report-card {
   background: white;
   border-radius: 16px;
@@ -29,10 +29,11 @@
 
 .report-card:hover {
   box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.15), 0 4px 6px -2px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
   border-color: #bfdbfe;
 }
 
-/* Card Header */
+/* Card Header - Matching qa-platform section-header style */
 .card-header {
   display: flex;
   align-items: center;
@@ -252,6 +253,7 @@
 .detail-item:hover {
   border-color: #cbd5e1;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
 }
 
 .detail-item.full-width {
@@ -267,6 +269,7 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3);
 }
 
 .detail-icon svg {
@@ -336,6 +339,7 @@
 .comparison-panel:hover {
   border-color: #cbd5e1;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .panel-header {
@@ -393,7 +397,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Responsive Design */
+/* Responsive Design - Matching qa-platform breakpoints */
 @media (max-width: 968px) {
   .summary-grid {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
