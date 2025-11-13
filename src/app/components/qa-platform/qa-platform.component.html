@@ -5,7 +5,7 @@
     <div class="logo-container">
       <!-- Mail Polish Logo -->
 
-      <img class="logo-icon" src="../../../assets/MPLogo.png" />
+      <img class="logo-icon" src="/assets/MPLogo.png" />
 
       <div class="logo-text">
         <h1 class="brand-name">MailPolish</h1>
@@ -219,7 +219,7 @@
       </button>
     </div>
 
-    <app-summary-report [summary]="result[0]._summary" [report]="result[0]"></app-summary-report>
+    <app-summary-report *ngIf="result" [summary]="result[0]._summary" [report]="result[0]"></app-summary-report>
 
     <app-analysis-loader [isVisible]="isProcessing"></app-analysis-loader>
   </div>
