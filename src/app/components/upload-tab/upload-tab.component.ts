@@ -41,12 +41,111 @@ import { HttpService } from '../../services/http-service';
           <div class="mt-2">
             <label
               class="flex items-center gap-2 px-4 py-2 bg-white border-2 border-gray-300 rounded-lg cursor-pointer hover:border-orange-500 transition-colors"
-              ><input accept=".txt,.doc,.docx" class="hidden" type="file" /><span
-                class="text-sm text-gray-700"
-                >Or upload copy file (.txt, .doc, .docx)</span
-              ></label
             >
+              <input
+                #fileInput
+                accept=".txt,.doc,.docx"
+                class="hidden"
+                type="file"
+                multiple
+                (change)="onFileSelected($event)"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-gray-600"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              <span class="text-sm text-gray-700">Or upload copy files (.txt, .doc, .docx)</span>
+            </label>
           </div>
+
+          <!-- Uploaded Files Display Cells -->
+          @if (uploadedFiles().length > 0) {
+            <div class="mt-3 space-y-2">
+              @for (file of uploadedFiles(); track file.name; let i = $index) {
+                <div class="p-4 bg-green-50 border-2 border-green-500 rounded-lg">
+                  <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="text-green-600"
+                      >
+                        <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path>
+                        <path d="M14 2v4a2 2 0 0 0 2 2h4"></path>
+                        <path d="M10 9H8"></path>
+                        <path d="M16 13H8"></path>
+                        <path d="M16 17H8"></path>
+                      </svg>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 mb-1">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="text-green-600 flex-shrink-0"
+                        >
+                          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                          <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        <span class="text-xs font-semibold text-green-800 uppercase">File Uploaded</span>
+                      </div>
+                      <p class="text-sm font-medium text-gray-900 truncate">{{ file.name }}</p>
+                      <p class="text-xs text-gray-600 mt-1">{{ formatFileSize(file.size) }}</p>
+                    </div>
+                    <button
+                      type="button"
+                      (click)="removeFile(i)"
+                      class="flex-shrink-0 p-1.5 text-red-600 hover:text-red-800 hover:bg-red-100 rounded-lg transition-colors"
+                      title="Remove file"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              }
+            </div>
+          }
         </div>
         <div class="space-y-4">
           <br/>
@@ -198,7 +297,56 @@ export class UploadTabComponent {
   autoFix = signal(true);
   showReasoningLogs = signal(true);
   generateFixRecommendations = signal(false);
+  uploadedFiles = signal<File[]>([]);
   // analyzing = signal(false);
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const validTypes = ['.txt', '.doc', '.docx'];
+      const newFiles: File[] = [];
+      const invalidFiles: string[] = [];
+
+      // Validate all selected files
+      for (let i = 0; i < input.files.length; i++) {
+        const file = input.files[i];
+        const fileExtension = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+        if (validTypes.includes(fileExtension)) {
+          newFiles.push(file);
+        } else {
+          invalidFiles.push(file.name);
+        }
+      }
+
+      // Add valid files to the existing array
+      if (newFiles.length > 0) {
+        this.uploadedFiles.update(files => [...files, ...newFiles]);
+        console.log(`${newFiles.length} file(s) uploaded successfully`);
+      }
+
+      // Show alert for invalid files
+      if (invalidFiles.length > 0) {
+        alert(`The following files are not supported:\n${invalidFiles.join('\n')}\n\nPlease upload only .txt, .doc, or .docx files`);
+      }
+
+      // Reset the input to allow uploading the same files again
+      input.value = '';
+    }
+  }
+
+  removeFile(index: number): void {
+    this.uploadedFiles.update(files => files.filter((_, i) => i !== index));
+    console.log('File removed');
+  }
+
+  formatFileSize(bytes: number): string {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+  }
 
   runAnalysis(): void {
     // this.analyzing.set(true);
