@@ -1,0 +1,67 @@
+<div class="qa-platform-container">
+  <h2>QA Platform - File Comparison</h2>
+
+  <div class="file-upload-row">
+    <!-- Left File Upload - Image/PDF -->
+    <div class="upload-section left-upload">
+      <h3>Reference File</h3>
+      <div class="upload-card">
+        <label for="leftFile" class="upload-label">
+          <span class="upload-icon">📄</span>
+          <span class="upload-text">Upload Image or PDF</span>
+        </label>
+        <input
+          type="file"
+          id="leftFile"
+          (change)="onLeftFileSelected($event)"
+          accept="image/*,.pdf"
+          #leftFileInput
+        />
+        <div *ngIf="leftFile" class="file-info">
+          <span class="file-name">{{ leftFile.name }}</span>
+          <button class="remove-btn" (click)="removeLeftFile()">×</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right File Upload - HTML -->
+    <div class="upload-section right-upload">
+      <h3>File to be Checked</h3>
+      <div class="upload-card">
+        <label for="rightFile" class="upload-label">
+          <span class="upload-icon">🌐</span>
+          <span class="upload-text">Upload HTML</span>
+        </label>
+        <input
+          type="file"
+          id="rightFile"
+          (change)="onRightFileSelected($event)"
+          accept=".html"
+          #rightFileInput
+        />
+        <div *ngIf="rightFile" class="file-info">
+          <span class="file-name">{{ rightFile.name }}</span>
+          <button class="remove-btn" (click)="removeRightFile()">×</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Check Button Row -->
+  <div class="action-row">
+    <button
+      class="check-btn"
+      [disabled]="!leftFile || !rightFile || isProcessing"
+      (click)="onCheckFiles()"
+    >
+      <span *ngIf="!isProcessing">Check Files</span>
+      <span *ngIf="isProcessing">Processing...</span>
+    </button>
+  </div>
+
+  <!-- Result Section -->
+  <div *ngIf="result" class="result-section">
+    <h3>Results</h3>
+    <pre>{{ result | json }}</pre>
+  </div>
+</div>
