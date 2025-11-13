@@ -26,4 +26,20 @@ export class HttpService {
 
   }
 
+  analyzeImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+
+    const headers = new HttpHeaders({
+      'accept': 'application/json'
+      // Don't set Content-Type - browser will set it automatically with boundary
+    });
+
+    return this.httpClient.post(
+      'https://merkledpai01-eus-enhancements-app.azurewebsites.net/analyze-image',
+      formData,
+      { headers }
+    );
+  }
+
 }

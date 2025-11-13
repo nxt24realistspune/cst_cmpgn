@@ -12,6 +12,7 @@ import { ResultsTabComponent } from '../results-tab/results-tab.component';
 import { ObservabilityMatrixComponent } from '../observability-matrix/observability-matrix.component';
 import { ReasoningWindowComponent } from '../reasoning-window/reasoning-window.component';
 import { IssueDetailModalComponent } from '../issue-detail-modal/issue-detail-modal.component';
+import { HtmlValidatorComponent } from "../html-validator/html-validator.component";
 
 @Component({
   selector: 'app-qa-platform',
@@ -24,7 +25,8 @@ import { IssueDetailModalComponent } from '../issue-detail-modal/issue-detail-mo
     ObservabilityMatrixComponent,
     ReasoningWindowComponent,
     IssueDetailModalComponent,
-  ],
+    HtmlValidatorComponent
+],
   template: `
     <div class="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <!-- Header -->
@@ -36,6 +38,22 @@ import { IssueDetailModalComponent } from '../issue-detail-modal/issue-detail-mo
           <div class="flex-1 transition-all">
             <!-- Tabs -->
             <div class="flex gap-2 mb-6">
+              <button (click)="setActiveTab('html-validator')" [class]="getTabClasses('html-validator')">
+                <svg
+                  class="w-4 h-4 inline mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                  />
+                </svg>
+                HTML Validator
+              </button>
               <button (click)="setActiveTab('upload')" [class]="getTabClasses('upload')">
                 <svg
                   class="w-4 h-4 inline mr-2"
@@ -52,7 +70,7 @@ import { IssueDetailModalComponent } from '../issue-detail-modal/issue-detail-mo
                 </svg>
                 Upload & Configure
               </button>
-              <button (click)="setActiveTab('reasoning')" [class]="getTabClasses('reasoning')">
+              <!-- <button (click)="setActiveTab('reasoning')" [class]="getTabClasses('reasoning')">
                 <svg
                   class="w-4 h-4 inline mr-2"
                   fill="none"
@@ -99,12 +117,13 @@ import { IssueDetailModalComponent } from '../issue-detail-modal/issue-detail-mo
                   />
                 </svg>
                 Observability Matrix
-              </button>
+              </button> -->
             </div>
 
             <!-- Tab Content -->
             <app-upload-tab *ngIf="activeTab() === 'upload'" #uploadTab> </app-upload-tab>
-
+            <app-html-validator *ngIf="activeTab() === 'html-validator'"></app-html-validator>
+<!--
             <app-reasoning-window
               *ngIf="activeTab() === 'reasoning'"
               [showWindow]="true"
@@ -121,7 +140,7 @@ import { IssueDetailModalComponent } from '../issue-detail-modal/issue-detail-mo
             </app-results-tab>
 
             <app-observability-matrix *ngIf="activeTab() === 'matrix'" [qaResults]="qaResults()">
-            </app-observability-matrix>
+            </app-observability-matrix> -->
           </div>
         </div>
       </div>
@@ -172,7 +191,7 @@ export class QaPlatformComponent implements OnInit {
   @ViewChild('uploadTab') uploadTab?: UploadTabComponent;
 
   // Reactive signals
-  activeTab = signal<TabType>('upload');
+  activeTab = signal<TabType>('html-validator');
   analyzing = signal(false);
   // analysisComplete = signal(false);
   // showReasoningWindow = signal(false);
@@ -189,8 +208,6 @@ export class QaPlatformComponent implements OnInit {
   }
 
   setActiveTab(tab: TabType): void {
-    if (tab === 'results' || tab === 'matrix' || tab === 'reasoning') {
-    }
     this.activeTab.set(tab);
   }
 
