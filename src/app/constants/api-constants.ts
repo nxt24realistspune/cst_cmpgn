@@ -1,7 +1,7 @@
 // API Base URLs
 export const API_BASE_URL = 'https://merkledpai01-eus-enhancements-app.azurewebsites.net/';
 // export const AGENT_API_URL = 'agent?html_input=';
-export const AGENT_API_URL = 'agent';
+export const AGENT_API_URL = 'analyze_campaign';
 
 // // API Endpoints
 // export const API_ENDPOINTS = {

@@ -219,7 +219,7 @@
       </button>
     </div>
 
-    <app-summary-report *ngIf="result" [summary]="result[0]._summary" [report]="result[0]"></app-summary-report>
+    <app-summary-report *ngIf="isValid(result)" [summary]="result.final_generated_response._summary" [report]="result.final_generated_response"></app-summary-report>
 
     <app-analysis-loader [isVisible]="isProcessing"></app-analysis-loader>
   </div>

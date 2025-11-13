@@ -59,12 +59,12 @@
     <div class="iframe-wrapper">
       <div class="iframe-box">
         <h3>Original HTML</h3>
-        <iframe [srcdoc]="_report.original_email"></iframe>
+        <iframe #iframeOrig></iframe>
       </div>
 
       <div class="iframe-box">
         <h3>Corrected HTML</h3>
-        <iframe [srcdoc]="_report.agent_suggestions"></iframe>
+        <iframe #iframeCorrected></iframe>
       </div>
     </div>
 

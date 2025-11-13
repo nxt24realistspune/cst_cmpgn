@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Welcome to Freemans — Email Mock</title>
+<style>
+  /* Reset-ish */
+  * {box-sizing: border-box}
+  body {font-family: "Helvetica Neue", Arial, sans-serif; margin:0; color:#333; background:#f5f5f6; -webkit-font-smoothing:antialiased;}
+  a {color:#d81b60; text-decoration:none;}
+  .container {max-width:760px; margin:24px auto; background:#fff; border:1px solid #e6e6e6;}
+  .topbar {padding:12px 18px; font-size:13px; color:#6d6d6d; text-align:left;}
+  .topbar a {color:#6d6d6d; text-decoration:underline; font-weight:500}
+  /* header */
+  .header {display:flex; align-items:center; justify-content:space-between; padding:18px;}
+  .logo {display:flex; align-items:center; gap:12px;}
+  .logo img {height:56px; object-fit:contain;}
+  .nav {display:flex; gap:8px; align-items:center;}
+  .nav a {padding:8px 12px; background:#efefef; border-radius:4px; font-size:13px; color:#333;}
+  .sale {background:#d94f4f; color:white; padding:8px 14px; border-radius:4px;}
+  hr.divider {border:0; border-top:1px dashed #e1e1e1; margin:0;}
+  /* main */
+  .main {display:flex; gap:28px; padding:28px;}
+  .left {flex:1; min-width:260px;}
+  .right {width:280px; display:flex; align-items:center; justify-content:center;}
+  h1.greeting {font-size:40px; margin:6px 0 8px; font-weight:700; letter-spacing:-0.5px;}
+  h2.sub {font-size:20px; margin:0 0 18px; color:#666; font-weight:600;}
+  p.lead {color:#555; line-height:1.5; margin:8px 0 16px;}
+  p.small {font-size:13px; color:#777; margin:6px 0;}
+  .promo-code {display:inline-block; background:#f3f3f3; padding:6px 10px; border-radius:4px; font-weight:700; letter-spacing:1px;}
+  .shop-btn {display:inline-block; margin-top:16px; background:#2b2b2b; color:#fff; padding:10px 16px; border-radius:6px; font-weight:700; text-transform:uppercase; font-size:13px}
+  /* promo circle */
+  .promo-circle {width:220px; height:220px; border-radius:50%; background:#df2c86; display:flex; align-items:center; justify-content:center; color:#fff; position:relative; box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+  .promo-circle .percent {font-size:72px; line-height:1; font-weight:700;}
+  .promo-circle .off {font-size:26px; margin-left:8px; font-weight:700;}
+  .plus-badge {position:absolute; bottom:-18px; left:50%; transform:translateX(-50%); background:#111; color:#fff; padding:6px 10px; border-radius:30px; font-size:13px; font-weight:700;}
+  /* bullet list */
+  .benefits {margin-top:26px; font-size:14px; color:#444; line-height:1.45}
+  .benefits li {margin:8px 0}
+  /* footer */
+  .footer {background:#f7f7f7; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:13px; color:#777}
+  .social {display:flex; gap:10px; align-items:center}
+  .social .icon {width:28px; height:28px; display:inline-flex; align-items:center; justify-content:center; background:#fff; border-radius:4px; border:1px solid #e7e7e7}
+  /* responsive */
+  @media (max-width:720px){
+    .main {flex-direction:column; padding:18px;}
+    .right {width:100%; order:2; margin-top:8px;}
+    .promo-circle {width:190px; height:190px;}
+    h1.greeting {font-size:32px}
+  }
+</style>
+</head>
+<body>
+  <div class="container" role="article" aria-label="Welcome email">
+    <div class="topbar">
+      This message contains graphics. If you do not see the graphics, <a href="#">click here to view</a> &nbsp;·&nbsp;
+      <a href="#">unsubscribe</a>
+    </div>
+
+    <div class="header" role="banner">
+      <div class="logo">
+        <!-- Replace src with the path to your logo or screenshot -->
+        <img src="/mnt/data/Welcome-to-Freemans-com.jpg" alt="Freemans logo or header image" />
+      </div>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#">Women</a>
+        <a href="#">Lingerie</a>
+        <a href="#">Men</a>
+        <a href="#">Kids</a>
+        <a href="#">Electricals</a>
+        <a href="#">House &amp; Garden</a>
+        <a class="sale" href="#">Sale</a>
+      </nav>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="main">
+      <div class="left">
+        <h1 class="greeting">Hi Lucy!</h1>
+        <h2 class="sub">Welcome to Freemans!</h2>
+
+        <p class="lead"><strong>Dear Mrs Austin,</strong></p>
+
+        <p class="lead">Thank you for signing up to <strong>Freemans emails</strong>. You will now be one of the first to know about our latest arrivals and collections, exclusive offers, sales, style advice and much, much more!</p>
+
+        <p class="small">So you don't miss out on the latest updates, add <a href="mailto:aggv@marketing.freemans.com">aggv@marketing.freemans.com</a> to your address book to ensure our emails get to you.</p>
+
+        <p class="small">To enjoy <strong>10% OFF</strong> your first online order, just enter <span class="promo-code">M34P</span> at the checkout.</p>
+
+        <a href="#" class="shop-btn" role="button" aria-label="Shop now">SHOP NOW</a>
+
+        <ul class="benefits" aria-label="Benefits list">
+          <li><strong>Free standard delivery</strong> and returns*</li>
+          <li><strong>Affordable ways to pay</strong> with our Freemans Flex account</li>
+          <li><strong>Thousands of new products</strong> added online throughout the season</li>
+          <li><strong>Be the first to hear</strong> about latest arrivals and exclusive discounts</li>
+        </ul>
+
+        <p style="margin-top:16px; color:#555;">Thanks and welcome to Freemans!<br /><em>The Freemans Team</em></p>
+      </div>
+
+      <aside class="right" aria-label="Promotional offer">
+        <div style="text-align:center">
+          <div class="promo-circle" role="img" aria-label="10 percent off">
+            <div style="display:flex; align-items:baseline; gap:6px">
+              <div class="percent">10</div>
+              <div class="off">%</div>
+            </div>
+            <div style="position:absolute; bottom:36px; font-weight:600; font-size:18px">OFF*</div>
+            <div class="plus-badge">PLUS</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <hr class="divider" />
+
+    <div class="footer" role="contentinfo">
+      <div>Stay social</div>
+      <div class="social" aria-hidden="false" aria-label="Social links">
+        <div class="icon" title="Facebook">F</div>
+        <div class="icon" title="Twitter">T</div>
+        <div class="icon" title="Blog">B</div>
+        <div class="icon" title="24/7">24/7</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
