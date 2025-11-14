@@ -11,12 +11,12 @@
     </div>
 
     <!-- Navigation Links -->
-    <div class="nav-links">
+    <!-- <div class="nav-links">
       <a routerLink="/qa-platform" routerLinkActive="active" style="color: white !important;
     font-weight: bold !important;" class="nav-link">QA Platform</a>
       <a routerLink="/link-checker" routerLinkActive="active" style="color: white !important;
     font-weight: bold !important;" class="nav-link">Link Checker</a>
-    </div>
+    </div> -->
   </div>
 
   <!-- Upload Section -->
@@ -219,7 +219,7 @@
     </div>
 
     <app-summary-report *ngIf="isValid(result)" [summary]="result.final_generated_response._summary" [report]="result.final_generated_response"></app-summary-report>
-
+    <app-link-checker-report *ngIf="response1" [response]="response1" ></app-link-checker-report>
     <app-analysis-loader [isVisible]="isProcessing"></app-analysis-loader>
   </div>
 </div>
