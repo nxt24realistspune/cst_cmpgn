@@ -1,0 +1,95 @@
+<div class="loader-overlay" *ngIf="isVisible">
+  <div class="loader-container">
+    <!-- Animated Logo -->
+    <div class="loader-logo">
+      <img [src]="logoPath" alt="MailPolish" class="pulse-logo" />
+    </div>
+
+    <!-- Main Loader Animation -->
+    <div class="loader-animation">
+      <div class="loader-circle">
+        <svg class="circular-loader" viewBox="25 25 50 50">
+          <circle
+            class="loader-path"
+            cx="50"
+            cy="50"
+            r="20"
+            fill="none"
+            stroke-width="3"
+            stroke-miterlimit="10"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Progress Text -->
+    <div class="loader-content">
+      <h2 class="loader-title">Analyzing Your Files</h2>
+      <p class="loader-subtitle">{{ loadingMessage }}</p>
+
+      <!-- Progress Steps -->
+      <div class="progress-steps">
+        <div class="step" [class.active]="currentStep >= 1" [class.completed]="currentStep > 1">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+              />
+            </svg>
+          </div>
+          <span class="step-label">Uploading Files</span>
+        </div>
+
+        <div class="step-connector" [class.active]="currentStep > 1"></div>
+
+        <div class="step" [class.active]="currentStep >= 2" [class.completed]="currentStep > 2">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+              />
+            </svg>
+          </div>
+          <span class="step-label">Processing</span>
+        </div>
+
+        <div class="step-connector" [class.active]="currentStep > 2"></div>
+
+        <div class="step" [class.active]="currentStep >= 3" [class.completed]="currentStep > 3">
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <span class="step-label">Analyzing</span>
+        </div>
+      </div>
+
+      <!-- Estimated Time -->
+      <div class="estimated-time">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10" stroke-width="2" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2" />
+        </svg>
+        <span>Estimated time: 2-3 minutes</span>
+      </div>
+
+      <!-- Fun Facts / Tips -->
+      <div class="loader-tip">
+        <span class="tip-icon">💡</span>
+        <p>{{ currentTip }}</p>
+      </div>
+    </div>
+  </div>
+</div>
