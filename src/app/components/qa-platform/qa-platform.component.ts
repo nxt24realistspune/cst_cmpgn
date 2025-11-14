@@ -4,11 +4,12 @@ import { HttpClient } from '@angular/common/http';
 import { AGENT_API_URL, API_BASE_URL } from '../../constants/api-constants';
 import { SummaryReport } from '../summary-report/summary-report';
 import { AnalysisLoaderComponent } from '../analysis-loader/analysis-loader.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-qa-platform',
   standalone: true,
-  imports: [CommonModule, SummaryReport, AnalysisLoaderComponent],
+  imports: [CommonModule, SummaryReport, AnalysisLoaderComponent, RouterModule],
   templateUrl: './qa-platform.component.html',
   styleUrls: ['./qa-platform.component.css'],
 })
@@ -71,8 +72,8 @@ export class QaPlatformComponent {
     const formData = new FormData();
     formData.append('html_file', this.rightFile, this.rightFile.name);
     formData.append('image', this.leftFile, this.leftFile.name);
-    // formData.append('leftFile', this.leftFile);
-    // formData.append('rightFile', this.rightFile);
+    formData.append('leftFile', this.leftFile);
+    formData.append('rightFile', this.rightFile);
 
     this.http.post(this.apiEndpoint, formData).subscribe({
       next: (response) => {
@@ -88,7 +89,6 @@ export class QaPlatformComponent {
   }
 
   isValid(obj: any): boolean {
-    return obj &&
-      obj.final_generated_response;
+    return obj && obj.final_generated_response;
   }
 }

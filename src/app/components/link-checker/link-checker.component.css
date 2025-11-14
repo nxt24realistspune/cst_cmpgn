@@ -1058,3 +1058,12 @@ input[type="file"] {
     font-size: 0.75rem;
   }
 }
+
+
+.link-list { list-style: none; padding: 0; margin: 0; }
+.link-item { display:flex; align-items:center; justify-content:space-between; gap: 12px; padding: 8px 6px; border-bottom: 1px solid #eee; }
+.link { color: #0b66c3; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 70%; }
+.status { display:flex; align-items:center; gap:6px; font-size: 0.85rem; color: #666; }
+.status.ok { color: #1a9a3a; }    /* green */
+.status.err { color: #d93025; }   /* red */
+.status .code { opacity: 0.8; margin-left: 4px; }
